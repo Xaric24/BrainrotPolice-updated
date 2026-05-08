@@ -298,7 +298,6 @@ applyFont(
 )
 
 local DismissBtn = Instance.new("ImageButton")
-DismissBtn.Active = false
 DismissBtn.BorderColor3 = Color3.fromRGB(0, 0, 0)
 DismissBtn.AnchorPoint = Vector2.new(0.5, 0)
 DismissBtn.Name = "DismissBtn"
