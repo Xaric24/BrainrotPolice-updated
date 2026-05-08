@@ -378,6 +378,30 @@ SectionDock.BorderSizePixel = 0
 SectionDock.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 SectionDock.Parent = MainContent
 
+DismissBtn.MouseButton1Click:Connect(function()
+    TweenService:Create(
+        IntroFrame,
+        TweenInfo.new(
+            0.5
+        ),
+        {
+            GroupTransparency = 1
+        }
+    ):Play()
+    TweenService:Create(
+        MainContent,
+        TweenInfo.new(
+            0.5
+        ),
+        {
+            GroupTransparency = 0
+        }
+    ):Play()
+
+    IntroFrame.Interactable = false
+    MainContent.Interactable = true
+end)
+
 -- Loader Txt
 local uilib = {}
 local currentOpen = nil
