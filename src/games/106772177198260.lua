@@ -1,1 +1,20 @@
-getgenv().bpg = {gameid = 106772177198260, gamename = "Reel a Brainrot!"}
+return function(section)
+    local elements = loadstring(game:HttpGet(getgitpath("src").."elements.lua"))()
+
+    local repStorage = game:GetService("ReplicatedStorage")
+
+    getgenv().Farming = false
+
+    elements:Toggle("Farming", section, function(isOn)
+        if isOn then
+            getgenv().Farming = true
+            while getgenv().Farming do
+                repStorage.RemoteHandler.Fishing:FireServer(
+                    "Caught",
+                    3
+                )
+                task.wait(0.1)
+            end
+        end
+    end)
+end
