@@ -37,8 +37,6 @@ return function(section)
                 char:MoveTo(bestArea.Position)
                 task.wait(0.1)
                 dashev:FireServer("EndWarp")
-                task.wait()
-                dashev:FireServer("ClearDash")
 
                 task.wait(0.1)
             end
