@@ -130,7 +130,7 @@ Sections.Home.Container.execLabel.Text = "Executor: " .. getexec()
 local gamePath = game:HttpGet(getgitpath("games") .. tostring(game.PlaceId) .. ".lua")
 local gameList = httpservice:JSONDecode(game:HttpGet(getgitpath("src").. "gameslist.json"))
 local elements = loadstring(game:HttpGet(getgitpath("src").."elements.lua"))()
-if #gamePath == 0 then
+if #gamePath == 0 or not gamePath then
     elements:Unsupported(Sections.Game.Container, function()
         if CurSection then
             CurSection.TabBtn.BackgroundTransparency = 1
