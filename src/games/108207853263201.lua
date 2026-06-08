@@ -1,13 +1,19 @@
 -- "Rizz Tower" because its the first result when searching 'vaehz'
 
-return function(section)
+return function(section, data)
     local elements = loadstring(game:HttpGet(getgitpath("src").."elements.lua"))()
 
     getgenv().WinFarm = false
 
     local plr = game:GetService("Players").LocalPlayer
 
-    elements:Toggle("Win Farm", section, function(bool)
+    local setdata = data[tostring(game.PlaceId)] or {}
+    setdata.winfarm = setdata.winfarm or false
+    data[tostring(game.PlaceId)] = setdata
+    writefile("BrainrotPolice/Config.json", game:GetService("HttpService"):JSONEncode(data))
+
+    elements:Toggle("Win Farm", section, setdata.winfarm, function(bool)
+        getgenv().setconfig("winfarm", bool)
         if bool then
             getgenv().WinFarm = true
 

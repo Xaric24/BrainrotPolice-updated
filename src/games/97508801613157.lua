@@ -1,12 +1,18 @@
 -- parkour run for brainrots
 
-return function(section)
+return function(section, data)
     local elements = loadstring(game:HttpGet(getgitpath("src").."elements.lua"))()
     getgenv().farming = false
 
+    local setdata = data[tostring(game.PlaceId)] or {}
+    setdata.farmrots = setdata.farmrots or false
+    data[tostring(game.PlaceId)] = setdata
+    writefile("BrainrotPolice/Config.json", game:GetService("HttpService"):JSONEncode(data))
+
     local plr = game:GetService("Players").LocalPlayer
 
-    elements:Toggle("Farming", section, function(v)
+    elements:Toggle("Farming", section, setdata.farmrots, function(v)
+        setconfig("farmrots", v)
         if v then
             getgenv().farming = true
 

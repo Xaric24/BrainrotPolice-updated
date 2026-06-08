@@ -1,10 +1,16 @@
 -- dream for brainrots
 
-return function(section)
+return function(section, data)
     local elements = loadstring(game:HttpGet(getgitpath("src").."elements.lua"))()
     getgenv().farming = false
 
-    elements:Toggle("Farming", section, function(v)
+    local setdata = data[tostring(game.PlaceId)] or {}
+    setdata.farming = setdata.farming or false
+    data[tostring(game.PlaceId)] = setdata
+    writefile("BrainrotPolice/Config.json", game:GetService("HttpService"):JSONEncode(data))
+
+    elements:Toggle("Farming", section, setdata.farming, function(v)
+        getgenv().setconfig("farming", v)
         if v then
             getgenv().farming = true
 

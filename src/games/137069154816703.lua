@@ -1,12 +1,18 @@
 -- hack vault for brainrots
 
-return function(section)
+return function(section, data)
     local elements = loadstring(game:HttpGet(getgitpath("src").."elements.lua"))()
 
     local plr = game:GetService("Players").LocalPlayer
     getgenv().FarmRots = false
 
-    elements:Toggle("Farm Brainrots", section, function(v)
+    local setdata = data[tostring(game.PlaceId)] or {}
+    setdata.farmrots = setdata.farmrots or false
+    data[tostring(game.PlaceId)] = setdata
+    writefile("BrainrotPolice/Config.json", game:GetService("HttpService"):JSONEncode(data))
+
+    elements:Toggle("Farm Brainrots", section, setdata.farmrots, function(v)
+        getgenv().setconfig("farmrots", v)
         if v then
             getgenv().FarmRots = true
 

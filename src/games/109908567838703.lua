@@ -1,6 +1,6 @@
 -- nuke for brainrots
 
-return function(section)
+return function(section, data)
     local elements = loadstring(game:HttpGet(getgitpath("src").."elements.lua"))()
 
     local brainrotFold = workspace.Camera.BrainrotContainer
@@ -12,7 +12,14 @@ return function(section)
     getgenv().AutoMoney = false
     getgenv().AutoRebirth = false
 
-    elements:Toggle("Auto Money", section, function(v)
+    local setdata = data[tostring(game.PlaceId)] or {}
+    setdata.automoney = setdata.automoney or false
+    setdata.autorebirth = setdata.autorebirth or false
+    data[tostring(game.PlaceId)] = setdata
+    writefile("BrainrotPolice/Config.json", game:GetService("HttpService"):JSONEncode(data))
+
+    elements:Toggle("Auto Money", section, setdata.automoney, function(v)
+        getgenv().setconfig("automoney", v)
         if v then
             getgenv().AutoMoney = true
 
@@ -30,7 +37,8 @@ return function(section)
         end
     end)
 
-    elements:Toggle("Auto Rebirth", section, function(v)
+    elements:Toggle("Auto Rebirth", section, setdata.autorebirth, function(v)
+        getgenv().setconfig("autorebirth", v)
         if v then
             getgenv().AutoRebirth = true
 

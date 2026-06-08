@@ -1,12 +1,20 @@
 -- scream for brainrots
 
-return function(section)
+return function(section, data)
     local elements = loadstring(game:HttpGet(getgitpath("src").."elements.lua"))()
     getgenv().AddingSpins = false
     getgenv().AutoSleepy = false
     getgenv().AutoOg = false
 
-    elements:Toggle("Add Inf Spins", section, function(v)
+    local setdata = data[tostring(game.PlaceId)] or {}
+    setdata.addspins = setdata.addspins or false
+    setdata.farmsleepy = setdata.farmrofarmsleepyts or false
+    setdata.farmog = setdata.farmog or false
+    data[tostring(game.PlaceId)] = setdata
+    writefile("BrainrotPolice/Config.json", game:GetService("HttpService"):JSONEncode(data))
+
+    elements:Toggle("Add Inf Spins", section, setdata.addspins, function(v)
+        setconfig("addspins", v)
         if v then
             getgenv().AddingSpins = true
 
@@ -20,7 +28,8 @@ return function(section)
         end
     end)
 
-    elements:Toggle("Auto Spin Sleepy Mutation", section, function(v)
+    elements:Toggle("Auto Spin Sleepy Mutation", section, setdata.farmsleepy, function(v)
+        setconfig("farmsleepy", v)
         if v then
             getgenv().AutoSleepy = true
 
@@ -36,7 +45,8 @@ return function(section)
         end
     end)
 
-    elements:Toggle("Auto Spin OG", section, function(v)
+    elements:Toggle("Auto Spin OG", section, setdata.farmog, function(v)
+        setconfig("farmog", v)
         if v then
             getgenv().AutoOg = true
 

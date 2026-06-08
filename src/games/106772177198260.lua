@@ -1,6 +1,6 @@
 -- Reel for brainrots
 
-return function(section)
+return function(section, data)
     local elements = loadstring(game:HttpGet(getgitpath("src").."elements.lua"))()
 
     local repStorage = game:GetService("ReplicatedStorage")
@@ -10,7 +10,13 @@ return function(section)
 
     getgenv().Farming = false
 
-    elements:Toggle("Farming", section, function(isOn)
+    local setdata = data[tostring(game.PlaceId)] or {}
+    setdata.farming = setdata.farming or false
+    data[tostring(game.PlaceId)] = setdata
+    writefile("BrainrotPolice/Config.json", game:GetService("HttpService"):JSONEncode(data))
+
+    elements:Toggle("Farming", section, setdata.farming, function(isOn)
+        getgenv().setconfig("farming", isOn)
         if isOn then
             getgenv().Farming = true
             while getgenv().Farming do

@@ -1,11 +1,19 @@
 -- sail for brainrots
 
-return function(section)
+return function(section, data)
     local elements = loadstring(game:HttpGet(getgitpath("src").."elements.lua"))()
     getgenv().Farming = false
     getgenv().Selling = false
     getgenv().ChosenZone = nil
     getgenv().MaxPrice = 0
+
+    local setdata = data[tostring(game.PlaceId)] or {}
+    setdata.farmrots = setdata.farmrots or false
+    setdata.farmsell = setdata.farmsell or false
+    setdata.farmzone = setdata.farmzone or "13"
+    setdata.maxprice = setdata.maxprice or "0"
+    data[tostring(game.PlaceId)] = setdata
+    writefile("BrainrotPolice/Config.json", game:GetService("HttpService"):JSONEncode(data))
 
     local player = game:GetService("Players").LocalPlayer
     local zonesFold = workspace.Zones
@@ -34,11 +42,13 @@ return function(section)
     end
 
 
-    elements:Textbox("Farm Zone (1-13)", section, function(v)
+    elements:Textbox("Farm Zone (1-13)", section, setdata.farmzone, function(v)
+        getgenv().setconfig("farmzone", v)
         getgenv().ChosenZone = zonesFold["Zone" .. v]
     end)
 
-    elements:Toggle("Autofarm", section, function(v)
+    elements:Toggle("Autofarm", section, setdata.farmrots, function(v)
+        getgenv().setconfig("farmrots", v)
         if v then
             getgenv().Farming = true
 
@@ -66,11 +76,13 @@ return function(section)
         end
     end)
 
-    elements:Textbox("Max price", section, function(v)
+    elements:Textbox("Max price", section, setdata.maxprice, function(v)
+        getgenv().setconfig("maxprice", v)
         getgenv().MaxPrice = tonumber(v)
     end)
 
-    elements:Toggle("Auto Sell", section, function(v)
+    elements:Toggle("Auto Sell", section, setdata.farmsell, function(v)
+        getgenv().setconfig("farmsell", v)
         if v then
             getgenv().Selling = true
 
