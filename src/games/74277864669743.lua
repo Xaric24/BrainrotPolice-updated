@@ -17,7 +17,8 @@ return function(section, data)
     setdata.farmequip = setdata.farmequip or false
     setdata.farmspeed = setdata.farmspeed or false
     setdata.farmcollect = setdata.farmcollect or false
-    writefile("BrainrotPolice/Config.json", httpservice:JSONEncode(setdata))
+    data[tostring(game.PlaceId)] = setdata
+    writefile("BrainrotPolice/Config.json", httpservice:JSONEncode(data))
 
     elements:Toggle("Farm Brainrots", section, setdata.farmrots, function(v)
         local dec = httpservice:JSONDecode(readfile("BrainrotPolice/Config.json"))
