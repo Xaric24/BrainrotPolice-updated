@@ -51,7 +51,7 @@ return (function(section)
         local character = utils.GetCharacter(player)
         if not character then return end
 
-        for _, part in character:GetChildren() do
+        for _, part in ipairs(character:GetChildren()) do
             if part:IsA("Tool") then
                 part.Parent = player.Backpack
             end
@@ -81,7 +81,7 @@ return (function(section)
     end
 
     local function doFarm(rotContainer)
-        for i, v in rotContainer:GetChildren() do
+        for _, v in ipairs(rotContainer:GetChildren()) do
             if getBrainrot(v) then
                 teleportTo(worldPositions.cosmic)
             end
@@ -90,14 +90,14 @@ return (function(section)
 
     task.spawn(function()
         while task.wait() do
-            if farming == false then continue end
-            local cosmics = getSpawnData("Cosmic")
-            if cosmics == nil then
-                -- // teleport
-                teleportTo(worldPositions.cosmic)
-				continue
+            if farming then
+                local cosmics = getSpawnData("Cosmic")
+                if cosmics == nil then
+                    teleportTo(worldPositions.cosmic)
+                else
+                    doFarm(cosmics)
+                end
             end
-            doFarm(cosmics)
         end
     end)
 

@@ -14,14 +14,14 @@ return function(section)
 
         for _, br in pairs(where:GetChildren()) do
             local prompt = br.PrimaryPart and br.PrimaryPart:FindFirstChildOfClass("ProximityPrompt")
-            if not prompt then continue end
-
-            utils.MoveCharacter(plr, br.PrimaryPart.Position)
-            task.wait(0.5)
-            utils.FirePrompt(prompt)
-            task.wait(0.25)
-            utils.MoveCharacter(plr, Vector3.new(-2, 4, 13))
-            task.wait(0.5)
+            if prompt then
+                utils.MoveCharacter(plr, br.PrimaryPart.Position)
+                task.wait(0.5)
+                utils.FirePrompt(prompt)
+                task.wait(0.25)
+                utils.MoveCharacter(plr, Vector3.new(-2, 4, 13))
+                task.wait(0.5)
+            end
         end
     end
 

@@ -20,24 +20,24 @@ return function(section)
 
             for _, brainrot in pairs(brainrots:GetChildren()) do
                 local rarity = brainrot:GetAttribute("Rarity")
-                if rarity ~= "ADMIN"
-                    and rarity ~= "Lucky"
-                    and rarity ~= "Ascendant"
-                    and rarity ~= "Transcendent"
-                    and rarity ~= "OG" then
-                    continue
-                end
+                local wanted = rarity == "ADMIN"
+                    or rarity == "Lucky"
+                    or rarity == "Ascendant"
+                    or rarity == "Transcendent"
+                    or rarity == "OG"
 
-                local prompt = utils.FindFirstDescendantOfClass(brainrot, "ProximityPrompt")
-                if brainrot.PrimaryPart and prompt then
-                    utils.MoveCharacter(plr, brainrot.PrimaryPart.Position)
-                    repeat
-                        utils.FirePrompt(prompt)
+                if wanted then
+                    local prompt = utils.FindFirstDescendantOfClass(brainrot, "ProximityPrompt")
+                    if brainrot.PrimaryPart and prompt then
+                        utils.MoveCharacter(plr, brainrot.PrimaryPart.Position)
+                        repeat
+                            utils.FirePrompt(prompt)
+                            task.wait()
+                        until not getgenv().Farming or not brainrot.Parent or brainrot.Parent ~= brainrots
                         task.wait()
-                    until not getgenv().Farming or not brainrot.Parent or brainrot.Parent ~= brainrots
-                    task.wait()
-                    utils.MoveCharacter(plr, Vector3.new(7, 10, 44))
-                    task.wait(0.25)
+                        utils.MoveCharacter(plr, Vector3.new(7, 10, 44))
+                        task.wait(0.25)
+                    end
                 end
             end
         end, 0.1)

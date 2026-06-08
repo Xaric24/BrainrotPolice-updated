@@ -79,17 +79,17 @@ return function(section)
             local sellRemote = game:GetService("ReplicatedStorage").Shared.Classes.RemoteFunction.Remotes.EntityShared_SellEntity
 
             for _, brainrot in pairs(player.Backpack:GetChildren()) do
-                if brainrot.Name == "Bat" then continue end
+                if brainrot.Name ~= "Bat" then
+                    local valueLabel = brainrot:FindFirstChild("Handle")
+                        and brainrot.Handle:FindFirstChild("ObjectInfo")
+                        and brainrot.Handle.ObjectInfo:FindFirstChild("Value")
+                        and brainrot.Handle.ObjectInfo.Value:FindFirstChild("ValueLabel")
 
-                local valueLabel = brainrot:FindFirstChild("Handle")
-                    and brainrot.Handle:FindFirstChild("ObjectInfo")
-                    and brainrot.Handle.ObjectInfo:FindFirstChild("Value")
-                    and brainrot.Handle.ObjectInfo.Value:FindFirstChild("ValueLabel")
-
-                if valueLabel and parseValue(valueLabel.Text) <= getgenv().MaxPrice then
-                    utils.SafeCall(function()
-                        sellRemote:InvokeServer(brainrot.Name)
-                    end)
+                    if valueLabel and parseValue(valueLabel.Text) <= getgenv().MaxPrice then
+                        utils.SafeCall(function()
+                            sellRemote:InvokeServer(brainrot.Name)
+                        end)
+                    end
                 end
             end
         end, 3)

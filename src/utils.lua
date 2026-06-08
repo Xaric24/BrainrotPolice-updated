@@ -45,14 +45,18 @@ function utils.FirePrompt(prompt)
 end
 
 function utils.StartToggleLoop(flagName, enabled, callback, delay)
+    getgenv().__BrainrotPoliceLoops = getgenv().__BrainrotPoliceLoops or {}
+
     getgenv()[flagName] = enabled
+    getgenv().__BrainrotPoliceLoops[flagName] = (getgenv().__BrainrotPoliceLoops[flagName] or 0) + 1
+    local token = getgenv().__BrainrotPoliceLoops[flagName]
 
     if not enabled then
         return
     end
 
     task.spawn(function()
-        while getgenv()[flagName] do
+        while getgenv()[flagName] and getgenv().__BrainrotPoliceLoops[flagName] == token do
             utils.SafeCall(callback)
             task.wait(delay or 0.1)
         end

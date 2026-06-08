@@ -43,66 +43,67 @@ return function(section)
                 if not tp(Vector3.new(345, 19, 2242)) then break end
                 local itemSpawners = workspace:FindFirstChild("ItemSpawners")
                 local celestial = itemSpawners and itemSpawners:WaitForChild("Celestial", 5)
-                if not celestial then task.wait(1) continue end
+                if celestial then
+                    waitForFolderChildren(celestial, 1, 5)
 
-                waitForFolderChildren(celestial, 1, 5)
+                    for _, br in pairs(celestial:GetChildren()) do
+                        if br.PrimaryPart then
+                            tp(br.PrimaryPart.Position)
 
-                for _, br in pairs(celestial:GetChildren()) do
-                    if br.PrimaryPart then
-                        tp(br.PrimaryPart.Position)
+                            task.wait(0.5)
 
-                        task.wait(0.5)
+                            local prompt = br.PrimaryPart:FindFirstChildOfClass("ProximityPrompt")
 
-                        local prompt = br.PrimaryPart:FindFirstChildOfClass("ProximityPrompt")
+                            if prompt then
+                                repeat
+                                    utils.FirePrompt(prompt)
+                                    task.wait()
+                                until not getgenv().FarmBrainrots or not br or br.Parent ~= celestial
 
-                        if prompt then
-                            repeat
-                                utils.FirePrompt(prompt)
-                                task.wait()
-                            until not getgenv().FarmBrainrots or not br or br.Parent ~= celestial
-                        else
-                            continue
+                                task.wait(0.5)
+
+                                tp(Vector3.new(343, 2, -15))
+                                task.wait(2)
+
+                                tp(Vector3.new(345, 19, 2242))
+                                task.wait(1)
+                            end
                         end
-
-                        task.wait(0.5)
-
-                        tp(Vector3.new(343, 2, -15))
-                        task.wait(2)
-
-                        tp(Vector3.new(345, 19, 2242))
-                        task.wait(1)
                     end
+                else
+                    task.wait(1)
                 end
 
 
                 if not tp(Vector3.new(353, 2, 2092)) then break end
                 local secret = itemSpawners and itemSpawners:WaitForChild("Secret", 5)
-                if not secret then task.wait(1) continue end
-                waitForFolderChildren(secret, 1)
+                if secret then
+                    waitForFolderChildren(secret, 1)
 
-                for _, br in pairs(secret:GetChildren()) do
-                    if br.PrimaryPart then
-                        tp(br.PrimaryPart.Position)
+                    for _, br in pairs(secret:GetChildren()) do
+                        if br.PrimaryPart then
+                            tp(br.PrimaryPart.Position)
 
-                        local prompt = br.PrimaryPart:FindFirstChildOfClass("ProximityPrompt")
+                            local prompt = br.PrimaryPart:FindFirstChildOfClass("ProximityPrompt")
 
-                        if prompt then
-                            repeat
-                                utils.FirePrompt(prompt)
-                                task.wait()
-                            until not getgenv().FarmBrainrots or not br or br.Parent ~= secret
-                        else
-                            continue
+                            if prompt then
+                                repeat
+                                    utils.FirePrompt(prompt)
+                                    task.wait()
+                                until not getgenv().FarmBrainrots or not br or br.Parent ~= secret
+
+                                task.wait(0.5)
+
+                                tp(Vector3.new(343, 2, -15))
+                                task.wait(2)
+
+                                tp(Vector3.new(353, 2, 2092))
+                                task.wait(1)
+                            end
                         end
-
-                        task.wait(0.5)
-
-                        tp(Vector3.new(343, 2, -15))
-                        task.wait(2)
-
-                        tp(Vector3.new(353, 2, 2092))
-                        task.wait(1)
                     end
+                else
+                    task.wait(1)
                 end
 
                 task.wait(0.1)
