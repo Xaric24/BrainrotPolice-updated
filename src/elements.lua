@@ -87,12 +87,13 @@ function stuff:addGame(king, gname, gstate, cb)
     newGame.ButtonElement.MouseButton1Click:Connect(cb)
 end
 
+-- to finish
 function stuff:Searchbar(king)
     local newSearch = elements.searchBar:Clone()
     newSearch.Parent = king
     newSearch.searchbar.Inp:GetPropertyChangedSignal("Text"):Connect(function()
         for i, v in pairs(king:GetChildren()) do
-            if v:IsA("Frame") and not v == newSearch then
+            if v.Name == "GameElement" then
                 v:Destroy()
             end
         end
