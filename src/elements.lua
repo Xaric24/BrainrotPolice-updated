@@ -90,7 +90,7 @@ end
 function stuff:Searchbar(king)
     local newSearch = elements.searchBar:Clone()
     newSearch.Parent = king
-    newSearch.searchbar.inp:GetPropertyChangedSignal("Text"):Connect(function()
+    newSearch.searchbar.Inp:GetPropertyChangedSignal("Text"):Connect(function()
         for i, v in pairs(king:GetChildren()) do
             if v:IsA("Frame") and not v == newSearch then
                 v:Destroy()
@@ -98,7 +98,7 @@ function stuff:Searchbar(king)
         end
 
         for i, v in pairs(gameList) do
-            if v["game"]:lower():find(newSearch.searchbar.inp.Text:lower()) then
+            if v["game"]:lower():find(newSearch.searchbar.Inp.Text:lower()) then
                 stuff:addGame(king, v["game"], v["status"], function()
                     game:GetService("ExperienceService"):LaunchExperience({placeId = v["id"]})
                 end)
