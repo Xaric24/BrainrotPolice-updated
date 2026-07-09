@@ -32,7 +32,7 @@ function env.import(id)
 end
 
 function env.getgitpath(where)
-    local mainBuild = "https://raw.githubusercontent.com/Xaric23/BrainrotPolice/refs/heads/main/"
+    local mainBuild = "https://raw.githubusercontent.com/Xaric24/BrainrotPolice-updated/refs/heads/main/"
     local paths = {
         src = mainBuild .. "src/",
         games = mainBuild .. "src/games/"
@@ -78,5 +78,5 @@ else
 end
 
 if typeof(queue_on_teleport) == "function" then
-    queue_on_teleport('loadstring(game:HttpGet("https://raw.githubusercontent.com/Xaric23/BrainrotPolice/refs/heads/main/src/init.lua"))()')
+    queue_on_teleport('loadstring(game:HttpGet("https://raw.githubusercontent.com/Xaric24/BrainrotPolice-updated/refs/heads/main/src/init.lua"))()')
 end
