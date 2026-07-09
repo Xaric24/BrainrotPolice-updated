@@ -21,5 +21,13 @@
   { "game": "Fake a Brainrot", "id": "110627433764494", "status": "Online" },
   { "game": "+1 Health for Brainrots", "id": "86614757217732", "status": "Online" },
   { "game": "+1 Speed Evolve", "id": "83569851223739", "status": "Online" },
-  { "game": "+1 Speed Keyboard Escape", "id": "95082159892680", "status": "Online" }
+  { "game": "+1 Speed Keyboard Escape", "id": "95082159892680", "status": "Online" },
+  { "game": "Smash crate for Brainrot", "id": "100964511576728", "status": "Online" },
+  { "game": "Paper Plane for Brainrots", "id": "110373292461174", "status": "Online" },
+  { "game": "Cross rivers for Brainrots", "id": "71213902019049", "status": "Online" },
+  { "game": "+1 Dash for Brainrots", "id": "85411355002110", "status": "Online" },
+  { "game": "Obby as a Brainrot", "id": "77862067599263", "status": "Online" },
+  { "game": "+1 Jetpack for Brainrot", "id": "80234914611737", "status": "Online" },
+  { "game": "Lick a Brainrot", "id": "112500097711893", "status": "Offline" },
+  { "game": "Skate for Brainrots", "id": "97931184538536", "status": "Online" }
 ]
